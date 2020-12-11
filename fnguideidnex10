@@ -300,3 +300,4 @@ print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, r
 lr_clf.fit(X_train , y_train)
 lr_pred = lr_clf.predict(X_test)
 print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
