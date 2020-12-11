@@ -1,0 +1,302 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+from sklearn.model_selection import train_test_split
+
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report,confusion_matrix
+from keras import models
+from keras import layers
+
+from google.colab import files
+upload=files.upload()
+
+df=pd.read_excel('데이터5.xlsx')
+
+df_date=df.set_index('Symbol Name')
+
+df_reset = df.drop(['Symbol Name'], axis = 1)
+
+df
+
+energy=df['en_num'].values
+industrial = df['in_num'].values
+luxury = df['lux_num'].values
+essential = df['es_num'].values
+health = df['he_num'].values
+finance = df['fi_num'].values
+it = df['it_num'].values
+utility = df['ut_num'].values
+transport = df['tr_num'].values
+construct = df['co_num'].values
+
+energy=energy[3:]
+industrial=industrial[3:]
+luxury=luxury[3:]
+essential=essential[3:]
+health=health[3:]
+finance=finance[3:]
+it=it[3:]
+utility=utility[3:]
+transport=transport[3:]
+construct=construct[3:]
+
+df_late1=df_reset.loc[:1085,:]
+df_late2=df_reset.loc[1:1086,:]
+df_late3=df_reset.loc[2:1087,:]
+
+np_late1=df_late1.values
+np_late2=df_late2.values
+np_late3=df_late3.values
+
+df_late11=pd.DataFrame(np_late1,columns=['en_num1',	'in_num1',	'lux_num1',	'es_num1',	'he_num1',	'fi_num1','it_num1'	,'ut_num1'	,'tr_num1'	,'co_num1'])
+df_late22=pd.DataFrame(np_late2,columns=['en_num2',	'in_num2',	'lux_num2',	'es_num2',	'he_num2',	'fi_num2','it_num2'	,'ut_num2'	,'tr_num2'	,'co_num2'])
+df_late33=pd.DataFrame(np_late3,columns=['en_num3',	'in_num3',	'lux_num3',	'es_num3',	'he_num3',	'fi_num3','it_num3'	,'ut_num3'	,'tr_num3'	,'co_num3'])
+
+
+
+#####energy
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+
+df_late['energy']=energy
+
+df_late
+
+y_energy_df = df_late['energy']
+X_energy_df= df_late.drop('energy',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####industrial
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['industrial']=industrial
+
+df_late
+
+y_energy_df = df_late['industrial']
+X_energy_df= df_late.drop('industrial',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####luxury
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['luxury']=luxury
+df_late
+
+y_energy_df = df_late['luxury']
+X_energy_df= df_late.drop('luxury',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####essential
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['essential']=essential
+
+df_late
+
+y_energy_df = df_late['essential']
+X_energy_df= df_late.drop('essential',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####health
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['health']=health
+df_late
+
+y_energy_df = df_late['health']
+X_energy_df= df_late.drop('health',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####finance
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['finance']=finance
+
+df_late
+
+y_energy_df = df_late['finance']
+X_energy_df= df_late.drop('finance',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####it
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['it']=it
+
+df_late
+
+y_energy_df = df_late['it']
+X_energy_df= df_late.drop('it',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####utility
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['utility']=utility
+df_late
+
+y_energy_df = df_late['utility']
+X_energy_df= df_late.drop('utility',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####transport
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['transport']=transport
+
+df_late
+
+y_energy_df = df_late['transport']
+X_energy_df= df_late.drop('transport',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
+
+#####construct
+df_late=pd.concat([df_late11,df_late22,df_late33],axis=1)
+df_late['construct']=construct
+
+df_late
+
+y_energy_df = df_late['construct']
+X_energy_df= df_late.drop('construct',axis=1)
+
+X_train, X_test, y_train, y_test=train_test_split(X_energy_df, y_energy_df, test_size=0.2, random_state=11)
+# Classifier 객체 생성
+dt_clf = DecisionTreeClassifier(random_state=11)
+rf_clf = RandomForestClassifier(random_state=11)
+lr_clf = LogisticRegression(random_state=11,max_iter= 10000)
+dt_clf.fit(X_train , y_train)
+dt_pred = dt_clf.predict(X_test)
+print('DecisionTreeClassifier 정확도: {0:.4f}'.format(accuracy_score(y_test, dt_pred)))
+rf_clf.fit(X_train , y_train)
+rf_pred = rf_clf.predict(X_test)
+print('RandomForestClassifier 정확도:{0:.4f}'.format(accuracy_score(y_test, rf_pred)))
+lr_clf.fit(X_train , y_train)
+lr_pred = lr_clf.predict(X_test)
+print('LogisticRegression 정확도: {0:.4f}'.format(accuracy_score(y_test, lr_pred)))
